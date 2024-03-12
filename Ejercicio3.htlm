@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="a.php" onsubmit="return Enviar()">
+
+    <label for="fecha">Introduzca la fecha de vuelo: <input type="date" name="fecha" id="fecha"></label>
+
+    <br><br>
+
+    <label>
+        Elija un país de destino:
+    <select name="pais" id="pais" onchange="Enseñar()">
+        <option value="elija" selected>Elija una opcion</option>
+        <option value="espana">España</option>
+        <option value="RU">Reino Unido</option>
+    </select>
+
+    <select name="ciudadesES" id="ciudadesES" hidden>
+        <option value="elijaES">Elija una ciudad</option>
+        <option value="Barcelona">Barcelona</option>
+        <option value="Madrid">Madrid</option>
+        <option value="Bilbao">Bilbao</option>
+    </select>
+
+    <select name="ciudadesIN" id="ciudadesIN" hidden>
+        <option value="elijaIN">Elige una ciudad</option>
+        <option value="liver">Liverpool</option>
+        <option value="man">Manchester</option>
+        <option value="lon">Londres</option>
+    </select>
+
+    </label>
+
+    <br><br>    
+
+    <label for="nombre">Nombre: <input type="text" name="nombre" id="nombre"></label><br><br>
+
+    <label for="apellidos">Apellidos: <input type="text" name="apellidos" id="apellidos"></label>
+
+    <br><br>
+
+    <label for="caja">He leído y acepto las condiciones: <input type="checkbox" name="caja" id="caja"> </label><br><br>    
+    <input type="submit" name="boton" id="boton">    
+    </form>
+
+
+    <script>
+        function Enviar(){
+            var fechaHoy = "2024-07-01";
+            let fecha = document.getElementById("fecha").value;
+            let nombre = document.getElementById("nombre").value;
+            let apellidos = document.getElementById("apellidos").value;
+            let pais = document.getElementById("pais").value;
+            let ciudadesES = document.getElementById("ciudadesES").value;
+            let ciudadesIN = document.getElementById("ciudadesIN").value;
+            let check = document.getElementById("caja").value;
+
+            if(fecha < fechaHoy){
+                alert('No se puede viajar antes del 1 de Julio');
+                document.getElementById("fecha").focus();
+                return false;
+            }
+
+            if(nombre.length < 10){
+                alert('La longitud del nombre es demasiado corta');
+                document.getElementById("nombre").focus();
+                return false;
+            }
+
+            if(apellidos.length < 10){
+                alert('La longitud del apellido es demasiado corta');
+                document.getElementById("apellidos").focus();
+                return false;
+            }
+
+            if(pais == "espana" && ciudadesES == "elijaES"){
+                alert('No has elegido ninguna ciudad de España');
+                document.getElementById("ciudadesES").focus();
+                return false;
+            }
+
+            if(pais == "RU" && ciudadesIN == "elijaIN"){
+                alert('No has elegido ninguna ciudad de Reino Unido');
+                document.getElementById("ciudadesIN").focus();
+                return false;
+            }
+
+            if(!caja.checked){
+                alert('Debes aceptar los terminos y condiciones');
+                document.getElementById("caja");
+                return false;
+            }
+            return true;
+        }
+
+        function Enseñar(){
+            let elegida = document.getElementById("pais").value;
+            let ciudadesES = document.getElementById("ciudadesES");
+            let ciudadesIN  = document.getElementById("ciudadesIN");
+
+            if(elegida == "espana"){
+                ciudadesES.removeAttribute('hidden');
+            } else {
+                ciudadesES.setAttribute('hidden','');
+            }
+
+            if(elegida == "RU"){
+                ciudadesIN.removeAttribute('hidden');
+            } else {
+                ciudadesIN.setAttribute('hidden','');
+            }
+
+        }
+    </script>
+</body>
+</html>
