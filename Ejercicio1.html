@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>     
+<body>
+    
+    <button onclick="pedirValores()">Interés con prompt</button>
+
+    <br><br>
+
+    <form onsubmit="Formulario(); return false;">
+        <label for="capital">Capital:</label>
+        <input type="number" id="capital" name="capital" required>
+
+        <br><br>
+
+        <label for="interes">Interés (%):</label>
+        <input type="number" id="interes" name="interes" required>
+
+        <br><br>
+
+        <label for="tiempo">Tiempo en meses:</label>
+        <input type="number" id="tiempo" name="tiempo" required>
+        
+        <br><br>
+        <input type="submit" value="Calcular">
+    </form>
+
+    <br><br>
+
+    <div id="resultado">
+
+    </div>
+
+    <script>
+        function InteresSimple(interes, capital, tiempo) {
+            return (Number(interes) * Number(capital) * Number(tiempo)) / 1200;
+        }
+
+        function Prestamo(cantidad) {
+            cantidad = Number(cantidad);
+
+            if (cantidad < 10000) {
+                alert('No se concede el préstamo');
+            } else {
+                alert('Se concede el préstamo');
+            }
+        }
+
+        function pedirValores() {
+            let interes = prompt('Dime el interés');
+            let capital = prompt('Dime el capital');
+            let tiempo = prompt('Dime el tiempo en meses');
+
+            let interesSimple = InteresSimple(interes, capital, tiempo);
+            let cantidadFinal = Number(capital) + interesSimple;
+
+            let prestamo = Prestamo(cantidadFinal);
+
+            alert("El capital final es: "+cantidadFinal);
+        }
+    
+        function Formulario() {
+            let capital = document.getElementById("capital").value;
+            let interes = document.getElementById("interes").value;
+            let tiempo = document.getElementById("tiempo").value;
+
+            let interesSimple = InteresSimple(interes, capital, tiempo);
+            let total = Number(capital) + interesSimple;
+            let prestamo = Prestamo(total);
+
+            document.getElementById("resultado").innerHTML = "El capital total es: " + total.toFixed(2);
+        }
+    </script>
+</body>
+</html>
